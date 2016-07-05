@@ -3,9 +3,9 @@ extends layout
 block content
   .container
     h1 Login
-    p.lead I would rather be alone than pretend that I feel alright
+    p.lead They told me singing and told me to stop.
     br
-    form(role='form', action='/login', method = 'post', style='max-width:300px;')
+    form(role='form', action='/api/users/login', method = 'post', style='max-width:300px;')
       .form-group
         input.form-controll(type='text', name='username', placeholder='Enter Username')
       .form-group

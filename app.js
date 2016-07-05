@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
+var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Session shiz. not sure if this is necessary
+//TODO - figure out what all this means
 app.use(require('express-session')({
 	secret:'sew_kewl',
 	resave: false,
@@ -35,18 +37,31 @@ app.use(require('express-session')({
 //Passport setups
 app.use(passport.initialize());
 app.use(passport.session());
+
 var Account = require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
-//Inesrt any oauthage here
+//TODO - add GOOGLE OAUTH
+//NEED TO SET UP AN ACTUAL SERVRE SOMEWHERE, get a domainname
+passport.usre(new GoogleStrategy(){
+    clientId: #####,
+    clientSecret: #####,
+    callbackURL: ######,
+    passReqToCallBack: true
+  },
+  function(request, accessToken, refreshToken, profile, done) {
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      return done(err, user);
+    });
+  }
+});
 
 //mongoose config
 mongoose.connect('mongodb://localhost/web_server');
 
-
+app.use('/api/users', users);
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -79,5 +94,4 @@ app.use(function(err, req, res, next) {
   });
 });
 
-console.log(app.get('port'));
 module.exports = app;
