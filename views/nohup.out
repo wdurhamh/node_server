@@ -1,0 +1,114 @@
+
+> node_server@0.0.0 start /home/ec2-user/gitrepos/node_server
+> node ./bin/www
+
+undefined
+[0mGET / [36m304 [0m341.738 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m2.256 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m0.887 ms - -[0m
+[0mGET /OandA/index.html [32m200 [0m2.114 ms - 1626[0m
+[0mGET /OandA/OandA.mov [33m404 [0m52.410 ms - 2551[0m
+[0mGET /OandA/index.html [32m200 [0m1.148 ms - 1626[0m
+[0mGET /OandA/OandA.mov [33m404 [0m51.523 ms - 2551[0m
+[0mGET /OandA/poem.html [32m200 [0m0.436 ms - 344[0m
+[0mPOST /cgi-bin/php?%2D%64+%61%6C%6C%6F%77%5F%75%72%6C%5F%69%6E%63%6C%75%64%65%3D%6F%6E+%2D%64+%73%61%66%65%5F%6D%6F%64%65%3D%6F%66%66+%2D%64+%73%75%68%6F%73%69%6E%2E%73%69%6D%75%6C%61%74%69%6F%6E%3D%6F%6E+%2D%64+%64%69%73%61%62%6C%65%5F%66%75%6E%63%74%69%6F%6E%73%3D%22%22+%2D%64+%6F%70%65%6E%5F%62%61%73%65%64%69%72%3D%6E%6F%6E%65+%2D%64+%61%75%74%6F%5F%70%72%65%70%65%6E%64%5F%66%69%6C%65%3D%70%68%70%3A%2F%2F%69%6E%70%75%74+%2D%64+%63%67%69%2E%66%6F%72%63%65%5F%72%65%64%69%72%65%63%74%3D%30+%2D%64+%63%67%69%2E%72%65%64%69%72%65%63%74%5F%73%74%61%74%75%73%5F%65%6E%76%3D%22%79%65%73%22+%2D%64+%63%67%69%2E%66%69%78%5F%70%61%74%68%69%6E%66%6F%3D%31+%2D%64+%61%75%74%6F%5F%70%72%65%70%65%6E%64%5F%66%69%6C%65%3D%70%68%70%3A%2F%2F%69%6E%70%75%74+%2D%6E [33m400 [0m16200.946 ms - 1279[0m
+[0mPOST /cgi-bin/php?%2D%64+%61%6C%6C%6F%77%5F%75%72%6C%5F%69%6E%63%6C%75%64%65%3D%6F%6E+%2D%64+%73%61%66%65%5F%6D%6F%64%65%3D%6F%66%66+%2D%64+%73%75%68%6F%73%69%6E%2E%73%69%6D%75%6C%61%74%69%6F%6E%3D%6F%6E+%2D%64+%64%69%73%61%62%6C%65%5F%66%75%6E%63%74%69%6F%6E%73%3D%22%22+%2D%64+%6F%70%65%6E%5F%62%61%73%65%64%69%72%3D%6E%6F%6E%65+%2D%64+%61%75%74%6F%5F%70%72%65%70%65%6E%64%5F%66%69%6C%65%3D%70%68%70%3A%2F%2F%69%6E%70%75%74+%2D%64+%63%67%69%2E%66%6F%72%63%65%5F%72%65%64%69%72%65%63%74%3D%30+%2D%64+%63%67%69%2E%72%65%64%69%72%65%63%74%5F%73%74%61%74%75%73%5F%65%6E%76%3D%22%79%65%73%22+%2D%64+%63%67%69%2E%66%69%78%5F%70%61%74%68%69%6E%66%6F%3D%31+%2D%64+%61%75%74%6F%5F%70%72%65%70%65%6E%64%5F%66%69%6C%65%3D%70%68%70%3A%2F%2F%69%6E%70%75%74+%2D%6E [33m400 [0m12318.893 ms - 1279[0m
+undefined
+[0mGET / [32m200 [0m26.301 ms - 870[0m
+[0mGET /phpMyAdmin [33m404 [0m21.161 ms - 2551[0m
+[0mGET /xmlrpc.php [33m404 [0m26.146 ms - 2551[0m
+undefined
+[0mGET / [36m304 [0m33.583 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.319 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m1.049 ms - -[0m
+undefined
+[0mGET / [36m304 [0m24.300 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.296 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m0.201 ms - -[0m
+[0mGET /fishing [36m304 [0m23.944 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.353 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m0.303 ms - -[0m
+[0mGET /fish/trip [36m304 [0m33.503 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.341 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m0.204 ms - -[0m
+[0mGET /fish/trip [32m200 [0m47.987 ms - 1719[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.657 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m0.236 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.232 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m1.398 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css.map [32m200 [0m0.798 ms - 54416[0m
+[0mGET /fish/trip [32m200 [0m32.568 ms - 1749[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.312 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m0.370 ms - -[0m
+[0mGET /fish/trip [32m200 [0m26.877 ms - 1750[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.305 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m0.223 ms - -[0m
+[0mGET /fish/trip [32m200 [0m29.403 ms - 1754[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.563 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m0.931 ms - -[0m
+undefined
+[0mGET / [32m200 [0m20.248 ms - 870[0m
+[0mGET /favicon.ico [33m404 [0m19.552 ms - 2551[0m
+[0mGET /fish/trip [32m200 [0m20.967 ms - 1754[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.690 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m0.363 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.276 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m0.728 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css.map [32m200 [0m0.502 ms - 54416[0m
+undefined
+[0mGET / [32m200 [0m12.315 ms - 870[0m
+Warning: missing space before text for line 31 of jade file "/home/ec2-user/gitrepos/node_server/views/fish/trip.jade"
+[0mGET /fish/trip [31m500 [0m22.470 ms - 3592[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.693 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m0.337 ms - -[0m
+[0mGET /fish/trip [31m500 [0m16.327 ms - 3574[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.301 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m5.811 ms - -[0m
+[0mGET /fish/trip [31m500 [0m14.712 ms - 3574[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.310 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m0.588 ms - -[0m
+[0mGET /fish/trip [32m200 [0m27.228 ms - 2334[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.298 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m0.321 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.301 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [36m304 [0m0.921 ms - -[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css.map [32m200 [0m0.912 ms - 54416[0m
+[0mGET /fish/trip [32m200 [0m28.166 ms - 2412[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.625 ms - 111[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [32m200 [0m0.367 ms - 121260[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css.map [32m200 [0m0.460 ms - 54416[0m
+[0mGET /fish/trip [32m200 [0m30.929 ms - 2426[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.763 ms - 111[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [32m200 [0m0.588 ms - 121260[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css.map [32m200 [0m0.477 ms - 54416[0m
+[0mGET /fish/trip [32m200 [0m31.404 ms - 2429[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.381 ms - 111[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [32m200 [0m1.014 ms - 121260[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css.map [32m200 [0m0.768 ms - 54416[0m
+[0mGET /fish/trip [31m500 [0m22.626 ms - 3316[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.392 ms - 111[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [32m200 [0m1.302 ms - 121260[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css.map [32m200 [0m0.473 ms - 54416[0m
+[0mGET /fish/trip [32m200 [0m33.080 ms - 2586[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.392 ms - 111[0m
+[0mGET /js/fish.js [32m200 [0m1.208 ms - 279[0m
+[0mGET /stylesheets/bootstrap/js/bootstrap.min.js [32m200 [0m0.556 ms - 36868[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [32m200 [0m0.485 ms - 121260[0m
+[0mGET /stylesheets/jquery-2.2.4.min.js [32m200 [0m0.312 ms - 85578[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css.map [32m200 [0m0.442 ms - 54416[0m
+[0mGET /api/fish/loc [33m404 [0m11.808 ms - 2551[0m
+[0mGET /fish/trip [32m200 [0m26.217 ms - 2583[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.427 ms - 111[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [32m200 [0m0.278 ms - 121260[0m
+[0mGET /stylesheets/jquery-2.2.4.min.js [32m200 [0m1.443 ms - 85578[0m
+[0mGET /stylesheets/bootstrap/js/bootstrap.min.js [32m200 [0m1.003 ms - 36868[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css.map [32m200 [0m0.413 ms - 54416[0m
+[0mGET /fish/trip [32m200 [0m36.372 ms - 2594[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.404 ms - 111[0m
+[0mGET /stylesheets/bootstrap/js/bootstrap.min.js [32m200 [0m1.467 ms - 36868[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css [32m200 [0m0.389 ms - 121260[0m
+[0mGET /stylesheets/jquery-2.2.4.min.js [32m200 [0m3.052 ms - 85578[0m
+[0mGET /stylesheets/bootstrap/css/bootstrap.min.css.map [32m200 [0m0.421 ms - 54416[0m
+undefined
+[0mGET / [32m200 [0m10.318 ms - 870[0m
+[0mGET /favicon.ico [33m404 [0m12.235 ms - 2551[0m

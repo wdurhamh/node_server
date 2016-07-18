@@ -1,0 +1,42 @@
+extends fish_header
+
+block content
+  // if logged in, show stats for individual, else way to lazy
+  //Show slide show of neat fish
+  div.carousel.slide(id="fish-carousel", data-ride="carousel")
+    ol.carousel-indicators
+      li(data-target="#fish-carousel", data-slide-to="0", class="active")
+      li(data-target="#fish-carousel", data-slide-to="1")
+      li(data-target="#fish-carousel", data-slide-to="2")
+      li(data-target="#fish-carousel", data-slide-to="3")
+    //slides
+    div.carousel-inner(role="listbox")
+      div.item.active
+        img.slide(src="/images/fish_slides/fish_lake.jpg")
+        div.carousel-caption
+          h3 Fish Lake
+          p Gena learns to flyfish!
+      div.item
+        img.slide(src="/images/fish_slides/phil_kiss_bass.jpg")
+        div.carousel-caption
+          h3 Malouf Lake
+          p Phil locks lips with a largemouth
+      div.item
+        img.slide(src="/images/fish_slides/winds_sight_fishing.jpg")
+        div.carousel-caption
+          h3 Wind Rivers
+          p In search of the Golden Trout
+      div.item
+        img.slide(src="/images/fish_slides/reuben_stream.jpg")
+        div.carousel-caption
+          h3 Not Sure Where
+          p Casting for the the Atlantic Salmon in western streams
+    //left/right buttons
+    a.left.carousel-control(href="#fish-carousel", role="button", data-slide="prev")
+      span.glyphicon.glyphicon-chevron-left(aria-hidden="true")
+      span.sr-only Preivous
+    a.right.carousel-control(href="#fish-carousel", role="button", data-slide="next")
+      span.glyphicon.glyphicon-chevron-right(aria-hidden="true")
+      span.sr-only Next
+    //indicators
+  //show some neat stats

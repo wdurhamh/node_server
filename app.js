@@ -11,7 +11,8 @@ var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var fish = require('./routes/fishing')
+var Auth = require('./routes/auth_check');
 var app = express();
 
 // view engine setup
@@ -44,6 +45,7 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 //TODO - add GOOGLE OAUTH
 //NEED TO SET UP AN ACTUAL SERVRE SOMEWHERE, get a domainname
+/**
 passport.usre(new GoogleStrategy(){
     clientId: #####,
     clientSecret: #####,
@@ -56,11 +58,12 @@ passport.usre(new GoogleStrategy(){
     });
   }
 });
-
+**/
 //mongoose config
 mongoose.connect('mongodb://localhost/web_server');
-
-app.use('/api/users', users);
+app.use('/api',Auth.apiAuth);
+app.use('/api/fish', fish);
+app.use('/api/user', users);
 app.use('/', routes);
 
 // catch 404 and forward to error handler
@@ -93,5 +96,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+app.listen(80);
 
 module.exports = app;
