@@ -1,0 +1,164 @@
+<!doctype html>
+
+<html ng-app="fishApp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Nunya</title>
+	
+	<link rel="stylesheet" href="/stylesheets/style.css">  
+	<link rel="stylesheet" href="/stylesheets/bootstrap/css/bootstrap.min.css">
+	
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
+	<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBLRoAMLBXxLs3gP-CosNGq784ul46zL64&libraries=places"></script>
+	<script src="/stylesheets/jquery-2.2.4.min.js"></script>
+	<script src="/stylesheets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/js/ng-file-upload.min.js"></script>
+	<script src="/fish_app/core.js"></script>  
+
+</head>
+<body>
+	<div class="container">
+		<div id="todo-form" class="row">
+            		<div class="col-sm-8 col-sm-offset-2 text-center">
+                		<form ng-controller="recordFishController">
+					<div class="row">
+                    			<div class="form-group col-md-2">
+						<label for="quantity">Quantity</label>	
+                        			<input id="quantity" type="number" class="form-control input-lg" placeholder="1" ng-model="formdata.count">
+                    			</div>
+                    			<div class="form-group col-md-3">
+						<label for="species">Species</label>	
+                        			<select id="species"  class="form-control input-lg"  ng-model="formdata.species">	
+							<option value="largemouth_bass">largemouth bass</option>
+							<option value="smallmouth_bass">smallmouth bass</option>
+							<option value="striped_bass">striped bass</option>
+							<option value="brook_trout">brook trout</option>
+							<option value="brown_trout">brown trout</option>
+							<option value="rainbow_trout">rainbow trout</option>
+							<option value="cutthroat_trout">cutthroat trout</option>
+							<option value="golden_trout">golden trout</option>
+							<option value="grayling">grayling</option>
+							<option value="bullhead_catfish">bullhead catfish</option>
+							<option value="channel_catfish">channel catfish</option>
+							<option value="blue_catfish">blue catfish</option>
+						</select>
+                    			</div>
+                    			<div class="form-group col-md-3">
+						<label for="length">Length (in.)</label>	
+                        			<input id="length" type="number" class="form-control input-lg"  ng-model="formdata.length">
+                    			</div>
+                    			<div class="form-group col-md-3">
+						<label for="lure">Lure/Fly</label>	
+                        			<input id="lure" type="text" class="form-control input-lg" placeholder="Parachute Adams" ng-model="formdata.lure">
+                    			</div>
+					</div>
+					<div class="row">
+                    			<div class="form-group col-md-4">
+						<label for="date">Date</label>
+                        			<input id="date" type="date" class="form-control input-lg"  ng-model="formdata.date">
+                    			</div>
+                    			<div class="form-group col-md-4">
+						<label for="time">Time</label>	
+                        			<input id="time" type="time" class="form-control input-lg"  ng-model="formdata.time">
+                    			</div>
+					<div class="form-group col-md-3">
+						<div class="btn" ngf-select ng-model="files" ngf-multiple="true">Select</div>
+						<img ng-repeat="file in files" ngf-src="file" ngf-resize="{width: 90, height:90, quality: 0.9}">
+  						Drop files: <div ngf-drop ng-model="files" class="drop-box">Drop</div>
+					</div>
+					</div>
+					<div class='row'>
+					<div class="form-group col-md-4">
+						<label for="body-of-water">Body of Water</label>
+						<select id="body-of-water" class="form-control input-lg" ng-model="formdata.bow" ng-change="getHoles()">
+							<option ng-repeat="bow in bows" value="{{bow._id}}">{{bow.name}}</option> 		
+						</select>
+						<!--BUTTON FOR NEW BODY OF WATER POPS UP MODAL-->
+						<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#BOWModal">Add a Body of Water</button>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="hole">Fishing Hole</label>
+						<select id="hole" class="form-control input-lg" ng-model="formdata.hole">
+							<option ng-selected="selected"  ng-repeat="hole in holes" value="{{hole._id}}">{{hole.name}}</option>
+						</select>
+						<!--BUTTON FOR NEW FISHING HOLE POPS US MODAL-->
+						<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#HoleModal">Add Fishing Hole</button>
+					</div>
+					</div>
+					<div class="row">
+                    			<div class="form-group">
+						<label for="time">Comment</label>
+						<input id="comment" type="text-box" class="form-control input-lg" ng-model="formdata.comment">
+					</div>
+					</div>
+                    			<button type="submit" class="btn btn-primary btn-lg" ng-click="createFish()">Add</button>
+                		</form>
+				<!--New BOW MODAL -->
+				<div class="modal fade" id="BOWModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  					<div class="modal-dialog" role="document">
+    						<div ng-controller="newBOWController" class="modal-content">
+      							<div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+       								</button>
+							        <h4 class="modal-title" id="myModalLabel">New Body of Water</h4>
+      							</div>
+      							<div  class="modal-body">
+       								<form>
+									<div class="form-group">
+										<label for="bow-name">Name</label>
+										<input id="bow-name" type="text" class="form-control input-lg" ng-model="formdata.name" ng-change="updateManualMarkerName()">
+									</div>
+									<!--Google Maps JS-->
+									<input id="map-pac-input" class="map-controls" type="text" placeholder="Search Box">
+									<div id="bow-map" class="form-group google-map"></div>	
+									<div class='message'>Selected Body of Water: {{formdata.name}}</div>
+									<div class='message'>Long/Lat: {{formdata.lnglt}} <button class="btn btn-warning" type="button" ng-click="clearLnglt()">Clear long/lat</button></div>
+								</form>
+      							</div>
+							<div class='row'>{{error_message}}</div>
+      							<div class="modal-footer">
+        							<button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="clearForm()">Close</button>
+        							<button type="button" class="btn btn-primary" ng-click="createBOW()">Save Body of Water</button>
+      							</div>
+    						</div>
+  					</div>
+				</div>
+				
+				<!--New Hole  MODAL -->
+				<div class="modal fade" id="HoleModal" tabindex="-1" role="dialog" aria-labelledby="HoleLabel" aria-hidden="true">
+  					<div class="modal-dialog" role="document">
+    						<div ng-controller="newHoleController" class="modal-content">
+      							<div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+       								</button>
+							        <h4 class="modal-title" id="HoleModalLabel">New Fishing Hole</h4>
+      							</div>
+      							<div  class="modal-body">
+       								<form>
+									<div class="form-group">
+										<label for="hole-name">Name</label>
+										<input id="hole-name" type="text" class="form-control input-lg" ng-model="formdata.name">
+									</div>
+									<!--Google Maps Pluging to get Coordinates-->
+									<div style="height:350px" id="hole-map" class="form-group google-map">
+									</div>	
+								</form>
+      							</div>
+							<div class='row'>{{error_message}}</div>
+      							<div class="modal-footer">
+        							<button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="clearForm()">Close</button>
+        							<button type="button" class="btn btn-primary" ng-click="createHole()">Save Hole</button>
+      							</div>
+    						</div>
+  					</div>
+				</div>
+            		</div>
+        	</div>
+	</div>
+</body>
+</html>
+

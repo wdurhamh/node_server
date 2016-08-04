@@ -3,7 +3,7 @@ extends fish_header
 block content
   // if logged in, show stats for individual, else way to lazy
   //Show slide show of neat fish
-  div.carousel.slide(id="fish-carousel", data-ride="carousel")
+  div.carousel.screen(id="fish-carousel", data-ride="carousel")
     ol.carousel-indicators
       li(data-target="#fish-carousel", data-slide-to="0", class="active")
       li(data-target="#fish-carousel", data-slide-to="1")
@@ -11,22 +11,22 @@ block content
       li(data-target="#fish-carousel", data-slide-to="3")
     //slides
     div.carousel-inner(role="listbox")
-      div.item.active
+      div.item.slide.active
         img.slide(src="/images/fish_slides/fish_lake.jpg")
         div.carousel-caption
           h3 Fish Lake
           p Gena learns to flyfish!
-      div.item
+      div.item.slide
         img.slide(src="/images/fish_slides/phil_kiss_bass.jpg")
         div.carousel-caption
           h3 Malouf Lake
           p Phil locks lips with a largemouth
-      div.item
+      div.item.slide
         img.slide(src="/images/fish_slides/winds_sight_fishing.jpg")
         div.carousel-caption
           h3 Wind Rivers
           p In search of the Golden Trout
-      div.item
+      div.item.slide
         img.slide(src="/images/fish_slides/reuben_stream.jpg")
         div.carousel-caption
           h3 Not Sure Where

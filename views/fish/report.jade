@@ -1,0 +1,72 @@
+extends fish_header
+
+block content
+  .container
+    h2 Record a Fish
+    form(role='form', action='/api/fish/trip', name="new-trip", method="post")
+      div.fish-entry.container
+        div.fish-basic.row
+          div.form-group.col-md-1
+            label(for="fish1-quantity") Quantity
+            input(type="number",class="form-control",id="fish1-quantity")
+          div.form-group.col-md-2
+            label(for="fish1-species") Species
+            select.species(class="form-control", id="fish1-species")
+              option(value="largemouthbass") largemouth bass
+              option(value="smallmouthbass") smallmouthbass
+              option(value="stripedbass") striped bass
+              option(value="brooktrout") brook trout
+              option(value="browntrout") brown trout
+              option(value="rainbowtrout") rainbow trout
+              option(value="cutthroattrout") cutthroat trout
+              option(value="goldentrout") golden trout
+              option(value="grayling") grayling
+              option(value="bullheadcatfish") bullhead catfish
+              option(value="channelcatfish") channel catfish
+              option(value="bluecatfish") blue catfish
+          div.form-group.col-md-2
+            label(for="fish1-length") Length (in.)
+            input(type="number",class="form-control",id="fish1-length")
+          div.form-group.col-md-2
+            label(for="fish1-lure") Lure/Bait
+            input(type="text",class="form-control",id="fish1-lure")
+          div.form-group.col-md-2
+            label(for="fish1-date") Date
+            input(type="date",class="form-control", id="fish1-date")
+          div.form-group.col-md-2
+            label(for="fish1-time") Time
+            input(type="time",class="form-control",id="fish1-time")
+        //conditions and general notes
+        div.fish-conditions.row
+        //location
+        div.fish-location.row
+          div.form-group.col-md-2
+            label(for="fish1-bow") Body of Water
+            select.bow(class="form-control", id="fish1-bow")
+            //fill in with javascript
+         //exact location using google maps, after longitude and latitude retreived from BOW 
+      //need to include button that does modal
+      button.btn.btn-primary(type='button', data-toggle='modal', data-target='#new_location_modal') Add location
+      
+      //modal stuff
+      div(tabindex='-1', class="modal fade", id='new_location_modal', role='dialog')
+        div(class="modal-dialog" role="document")
+         div(class="modal-content")
+          div(class="modal-header")
+            button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") X
+            h4.modal-title  New Location
+          div(class="modal-body")
+            form(id='new-loc-form' role='form', action='/api/fish/loc', name="new-loc", method="post")
+              div(class="form-group" id="loc-name-div")
+                label(for='name') Name
+                input.form-control(id='loc_name', type='text', name='name')
+                button(id="search-button" type=button class="btn btn-default") Search
+              div(class="modal-footer")
+                button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
+                button(type="submit" class="btn btn-primary") Save location
+
+      br
+      button.btn.btn-default(type='submit') Submit
+
+

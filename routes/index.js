@@ -20,7 +20,8 @@ router.get('/register', function(req,res){
 	res.render('register',{});
 });
 
-router.get('/login', function(req,res){
+router.get('/login',function(req,res){
+        console.log('Because we have been here before');
 	res.render('login', {user:req.user});
 });
 
@@ -41,6 +42,10 @@ router.get('/fish/trip', Auth.isAuthenticated, function(req,res){
 	res.render('fish/trip',{});
 });
 
+router.get('/fish/record', Auth.isAuthenticated, function(req,res){
+	res.sendfile('./public/fish_app/index.html');
+});
+
 router.get('/port', function(req,res){
 	res.render('port/port_home',{isIndex:true});
 });
@@ -48,5 +53,18 @@ router.get('/port', function(req,res){
 router.get('/port/cultcompt', function(req,res){
 	res.render('port/cultcomp',{});
 });
+
+router.get('/port/crit', function(req,res){
+	res.render('port/crit', {});
+});
+
+router.get('/port/life',function(req,res){
+	res.render('port/personal',{});
+});
+
+router.get('/port/lang', function(req,res){
+	res.render('port/lang_compt',{});
+});
+
 
 module.exports = router;

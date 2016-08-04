@@ -1,16 +1,16 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Fish = new Schema({
+	count:Number,
 	species:String,
 	length:Number,
-	weight:Number,
-	image:String,
 	lure:String,
-	water_type, String,
-//water type: shallow, drop off deep, eddie, etc..
-	trip_id:Number,
-	loc_id:Number,
-	user_id:Number
+	date:String,
+	time:String,
+	images:[String],//paths to images in public folder
+	body_of_water:String,
+	hole:String,//fishing hole, body of water associated with each fishing hole can be looked up
+	comment:String
 });
 
 module.exports = mongoose.model('Fish', Fish);

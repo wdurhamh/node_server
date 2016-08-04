@@ -8,6 +8,7 @@ var Account = require('../models/account');
 
 
 router.post('/login', passport.authenticate('local'), function(req,res){
+	console.log('Authenticating');
 	res.redirect('/');
 });
 

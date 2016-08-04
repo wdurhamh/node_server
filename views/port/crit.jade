@@ -1,0 +1,20 @@
+include port_header
+  block content
+    h3 Cultural Competence
+    div
+      <!-- Nav tabs -->
+      ul(class="nav nav-tabs" role="tablist")
+        li(role="presentation" class="active")
+          a(href="#reflection" aria-controls="reflection" role="tab" data-toggle="tab") Reflection
+        li(role="presentation")
+          a(href="#persuasive" aria-controls="practice" role="tab" data-toggle="tab") Persuasive Paper
+        li(role="presentation")
+          a(href="#research" aria-controls="product" role="tab" data-toggle="tab") Research Paper
+      <!-- Tab panes -->
+      div(class="tab-content")
+        div(role="tabpanel" class="tab-pane active" id="reflection")
+          iframe(width="800px", onload="resizeIframe(this)", scrolling='no', frameborder='no', src='http://winstondhurst.me/spanish_portfolio/crit_reflection.html' )
+        div(role="tabpanel" class="tab-pane" id="persuasive")
+          iframe(width="800px", onload="resizeIframe(this)", scrolling='no', frameborder='no', src='http://winstondhurst.me/spanish_portfolio/persuasive.html' )
+        div(role="tabpanel" class="tab-pane" id="research")
+          iframe(width="800px", onload="resizeIframe(this)", scrolling='no', frameborder='no', src='http://winstondhurst.me/spanish_portfolio/researchpaper.html' )
