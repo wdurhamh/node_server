@@ -2,19 +2,31 @@
 var baseURL = '/api/fish'
 var baseUploadPath = 'public/pics/fishApp/'
 
-var fishApp = angular.module('fishApp', ['ngFileUpload']);
+var fishApp = angular.module('fishApp', ['ngFileUpload', 'ui.bootstrap']);
 
-fishApp.controller('recordFishController', ['$scope','$http','Upload',function($scope, $http, Upload){
+fishApp.controller('recordFishController', ['$scope','$http','$uibModal','Upload',function($scope, $http, $uibModal, Upload){
 	//initialize variables
 	$scope.formdata = {};
 	$http.get(baseURL+'/loc')
 	.success(function(data){
 		$scope.bows=data;
+		$scope.formdata.bow = data[0]._id;
+		$scope.getHoles();
 	})
 	.error(function(){
 		console.log('Unable to retrieve bodies of water');
 	});
 
+	$http.get(baseURL+'/trip')
+	.success(function(data){
+		$scope.trips = data;
+		console.log($scope.trips);
+	})
+	.error(function(){
+		console.log('Unable to retrieve bodies of water');
+	});
+
+	
 
 	$scope.sendFish = function(){
 		$http.post(baseURL + '/fish', $scope.formdata)
@@ -61,22 +73,109 @@ fishApp.controller('recordFishController', ['$scope','$http','Upload',function($
 			.success(function(data){
 				console.log(data);
 				$scope.holes = data;
+				$scope.formdata.hole = data[0]._id;
 			})
 			.error(function(){
 				console.log('Eror');
 			});
 		}
 	};
+
+	$scope.loadTrip = function(){
+		console.log("Loading trip. uh hu, yeah I'm sure");
+	};
 	
+	//---------------BOW Modal Setup-----------------
+	$scope.openBOWModal = function (size) {
+
+    		var modalInstance = $uibModal.open({
+      			templateUrl: '../fish_app/bow_modal.html',
+			windowTemplateUrl:'../fish_app/window.html',
+      			controller: 'BOWModalController',
+      			size: size,
+      			resolve: {
+        			bows: function () {
+          				return $scope.bows;
+        			}
+      			}
+    		});
+
+    		modalInstance.result.then(function (selectedBOW) {
+      			$scope.bows.push(selectedBOW);
+			console.log(selectedBOW);
+			$scope.formdata.bow = selectedBOW._id;
+			$scope.getHoles();
+    		}, function () {
+      			console.log('Modal dismissed at: ' + new Date());
+    		});
+
+  	};
+
+	//---------------Hole Modal Setup-----------------
+	$scope.openHoleModal = function (size) {
+		if($scope.formdata.bow){
+    			var modalInstance = $uibModal.open({
+      				templateUrl: '../fish_app/hole_modal.html',
+				windowTemplateUrl:'../fish_app/window.html',
+      				controller: 'holeModalController',
+      				size: size,
+      				resolve: {
+        				holes: function () {
+          					return $scope.holes;
+        				},
+					bow: function(){
+						return $scope.formdata.bow;
+					}
+      				}
+    			});
+	
+    			modalInstance.result.then(function (selectedHole) {
+      				$scope.holes.push(hole);
+    			}, function () {
+      				console.log('Modal dismissed at: ' + new Date());
+    			});
+		}
+  	};
+
+	//---------------Trip Modal Setup-----------------
+	$scope.openTripModal = function(size) {
+		var modalInstance = $uibModal.open({
+			templateUrl:'../fish_app/trip_modal.html',
+			windowTemplateUrl:'../fish_app/window.html',
+			controller:'tripModalController',
+			size:size,
+		});
+
+		modalInstance.result.then(function(trip){
+			if(!$scope.trips){
+				$scope.trips = [];
+			}
+			$scope.trips.push(trip);
+			$scope.formdata.trip=trip._id;
+		}, function(){
+			console.log("Trip modal dismissed");
+		});
+	};
 }]);
 
-fishApp.controller('newBOWController', ['$scope', '$http','$timeout', function($scope, $http, $timeout){
+fishApp.controller('BOWModalController', ['$scope', '$http','$timeout','$uibModalInstance', function($scope, $http, $timeout, $uibModalInstance){
 	$scope.formdata = {};
+	
+	$scope.ok = function () {
+    		$uibModalInstance.close($scope.selected.item);
+  	};
+
+  	$scope.cancel = function () {
+    		$uibModalInstance.dismiss('cancel');
+		$scope.formdata = {};
+  	};
+
 	$scope.displayPlaceName = function(marker){	
 		$scope.formdata.name = marker.title;
 		$scope.formdata.lnglt = marker.position;
 	};
-	$timeout(function(){
+
+	$scope.loadMap = function(){
 		//------------------------------------------------------------------------------------------------
 		//initialize google map (javascript)
 		$scope.map = new google.maps.Map(document.getElementById('bow-map'), {
@@ -173,7 +272,7 @@ fishApp.controller('newBOWController', ['$scope', '$http','$timeout', function($
 			});
 		});
 		//------------------------------------------------------------------------------------------------
-	});	
+	};	
 
 
 	$scope.clearForm=function(){
@@ -189,7 +288,6 @@ fishApp.controller('newBOWController', ['$scope', '$http','$timeout', function($
 			$scope.clickedMarker.title = $scope.formdata.name;
 			$scope.clickedMarker.setMap(null);
 			$scope.clickedMarker.setMap($scope.map);
-			console.log('Updated manual marker', $scope.formdata.name);
 		}
 	}
 
@@ -202,7 +300,7 @@ fishApp.controller('newBOWController', ['$scope', '$http','$timeout', function($
 			}
                 	$http.post(baseURL + '/loc', $scope.formdata)
                 	.success(function(data){
-                        	$scope.formdata = {};
+    				$uibModalInstance.close(data);
                 	})
                 	.error(function(){
                         	console.log('Error');
@@ -214,33 +312,66 @@ fishApp.controller('newBOWController', ['$scope', '$http','$timeout', function($
         };
 }]);
 
-fishApp.controller('newHoleController', ['$scope', '$http', '$timeout', function($scope, $http, $timeout){
+fishApp.controller('holeModalController', ['$scope', '$http', '$uibModalInstance','holes','bow', function($scope, $http, $uibModalInstance, holes, bow){
 	$scope.formdata = {};
-	//need to get a long/lat from bow, use that to center
-	$timeout(function(){
+	$scope.formdata.bow = bow;
+  	$scope.cancel = function () {
+    		$uibModalInstance.dismiss('cancel');
+		$scope.formdata = {};
+  	};
+
+	$scope.displayPlaceName = function(marker){	
+		$scope.formdata.name = marker.title;
+		$scope.formdata.lnglt = marker.position;
+	};
+
+	$scope.clearLnglt = function(){
+		delete $scope.formdata.lnglt;
+	};
+
+	$scope.loadMap = function(){
+		console.log("initializing map");
       		$scope.map = new google.maps.Map(document.getElementById('hole-map'), {
-          		center: {lat: -34.397, lng: 150.644},
-          		zoom: 5
+          		center: holes[0].lnglt,
+          		zoom: 10
         	});
+		$scope.clickedMarker;
 		$scope.map.addListener('click', function(e){
+			$scope.$apply(function(){
 			//display a new proposed marker
-			var marker = new google.maps.Marker({
-    				position: e.latLng,
-    				map: $scope.map
-  			});
-  			$scope.map.panTo(e.latLng);
+				if($scope.clickedMarker){
+					$scope.clickedMarker.setMap(null);
+				}
+				var name = "Unlabeled";
+                        	if($scope.formdata.name){
+                        		name = $scope.formdata.name;
+                 		}
+				$scope.clickedMarker = new google.maps.Marker({
+    					position: e.latLng,
+    					map: $scope.map,
+					title:name
+  				});
+				$scope.$apply($scope.displayPlaceName($scope.clickedMarker));
+			});
 		});
+
 		//place markers of existing Holes
-	});	
-		
-	$scope.clearForm=function(){
-		$scope.formdata={};
+          	holes.forEach(function(hole) {
+			//create a marker for each new place
+			var marker = new google.maps.Marker({
+              			map: $scope.map,
+              			title: hole.name,
+              			position: hole.lnglt
+            		});
+		});
 	};	
+		
 	$scope.createHole = function(){
 		if($scope.formdata.name){
                 	$http.post(baseURL + '/hole', $scope.formdata)
                 	.success(function(data){
                         	$scope.formdata = {};
+    				$uibModalInstance.close(data);
                 	})
                 	.error(function(){
                         	console.log('Error');
@@ -251,3 +382,38 @@ fishApp.controller('newHoleController', ['$scope', '$http', '$timeout', function
 		}
         };
 }]);
+
+fishApp.controller('tripModalController', ['$scope','$http','$uibModalInstance', function($scope,$http,$uibModalInstance){
+	$scope.formdata = {};
+	
+  	$scope.cancel = function () {
+    		$uibModalInstance.dismiss('cancel');
+		$scope.formdata = {};
+  	};
+
+	$scope.createTrip = function(){	
+		if($scope.formdata.name){
+			console.log('Sending trip');
+                	$http.post(baseURL + '/trip', $scope.formdata)
+                	.success(function(data){
+				console.log(data);
+                        	$scope.formdata = {};
+    				$uibModalInstance.close(data);
+                	})
+                	.error(function(){
+                        	console.log('Error');
+                	});
+		}
+		else{
+			$scope.error_message = 'Name is required';
+		}
+	}
+	
+}]);
+
+fishApp.directive("fishMenu", function(){
+	return {
+		templateUrl: "../fish_app/fish_menu.html"
+	}
+});
+
