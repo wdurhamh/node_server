@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Loc = new Schema({
 	name:String,
-	lnglt:{lat:String, lng:String},
+	lnglt:{lat:Number, lng:Number},
 	holes:[String]	
 });
 
