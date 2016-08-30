@@ -4,6 +4,7 @@ var path = require('path');
 var Location = require('../models/loc');
 var Hole = require('../models/hole');
 var Fish = require('../models/fish');
+var Trip = require('../models/trip');
 var fs = require('fs');
 
 var baseURL = '/home/ec2-user/gitrepos/node_server/';
@@ -12,21 +13,7 @@ router.get('/', function(req,res){
 	
 });
 
-router.post('/trip', function(req,res){
 
-});
-
-router.post('/trip/:tripid', function(req,res){
-	if(!req.params.tripid){
-		
-	}
-});
-
-router.get('/trip/:tripid', function(req,res){
-        if(!tripid){
-        	res.render('fish/trip')
-        }
-});
 
 router.get('/loc', function(req,res){
 	//get a list of all location names and ids
@@ -53,11 +40,12 @@ router.post('/loc', function(req,res){
 				console.log(err);
 				res.status(500).send('Database error');
 			}
-			Location.create({
+			var bow = {
 				name:req.body.name,
 				lnglt:req.body.lnglt,
 				holes:[hole._id]
-			},function(err, loc){
+			};
+			Location.create(bow,function(err, loc){
 				if(err){
 					console.log(err);
 					res.status(500).send('Database error');
@@ -69,12 +57,13 @@ router.post('/loc', function(req,res){
 							console.log(err);
 							res.status(500).send('Databse error');
 						}
-						res.status(200).send("OK");
+						res.json(loc);
 					});		
 				}
 			});
 	});
 });
+
 //Endpoint to get a specific body of water's holes
 router.get('/loc/:loc_id/holes', function(req,res){
 	Hole.find({bow:req.params.loc_id},function(err,holes){
@@ -85,6 +74,52 @@ router.get('/loc/:loc_id/holes', function(req,res){
 		res.json(holes);
 	});
 });
+
+//Endpoint to add a new fishing hole
+router.post('/hole', function(req,res){
+	var hole = {
+		name:req.body.name,
+		lnglt:req.body.lnglt,
+		bow:req.body.bow
+	};
+	Hole.create(hole, function(err, newHole){
+		if(err){
+			console.log(err);
+			res.status(500).send('Database Error');
+		}
+		console.log(hole);
+		res.json(newHole);
+	});
+});
+
+//Endpoint to add a new trip
+router.post('/trip', function(req,res){
+	Trip.create({name:req.body.name}, function(err, trip){
+		if(err){
+			console.log(err);
+			res.status(500).send('Database Error');
+		}
+		console.log(trip);
+		res.json(trip);
+	});
+});
+
+router.get('/trip', function(req,res){
+	Trip.find({}, function(err, trips){
+		if(err){
+			console.log(err);
+			res.status(500).semd('Databse error');
+		}
+		res.json(trips);
+	});
+});
+
+router.get('/trip/:tripid', function(req,res){
+        if(!tripid){
+        	res.render('fish/trip')
+        }
+});
+
 
 //Endpoint to get all fish
 router.get('/fish', function(req,res){
