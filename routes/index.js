@@ -46,6 +46,10 @@ router.get('/fish/record', Auth.isAuthenticated, function(req,res){
 	res.sendfile('./public/fish_app/index.html');
 });
 
+router.get('/fish/view',function(req,res){
+	res.sendfile('./public/fish_app/viewport.html');
+});
+
 router.get('/port', function(req,res){
 	res.render('port/port_home',{isIndex:true});
 });

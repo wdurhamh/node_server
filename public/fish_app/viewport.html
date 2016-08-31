@@ -14,6 +14,7 @@
 	<script src ="/js/ui-bootstrap-2.0.1.min.js"></script>
 	<script src="/js/ng-file-upload.min.js"></script>
 	<script src="/fish_app/core.js"></script>  
+	<script src="/fish_app/view-port-controller.js"></script>  
 
 </head>
 <body ng-controller="viewController">
@@ -30,7 +31,7 @@
 			</div>
 		</div>	
 	</div>
-	<div  ng-repeat="fish in fish">
+	<div  ng-repeat="fish in fishes">
 		<div class="row">
 			<div class="col-md-4">{{fish.species}}</div>
 			<div class="col-md-4">{{fish.count}}</div>
